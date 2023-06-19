@@ -28,19 +28,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.avaliacao_03_andre_ads_pdm.R
-import com.example.avaliacao_03_andre_ads_pdm.data.Aluno
+import com.example.avaliacao_03_andre_ads_pdm.data.Musica
 import com.example.avaliacao_03_andre_ads_pdm.network.BASE_URL
 
 @Composable
-fun AlunosScreen(
-    alunosViewModel: AlunosViewModel = viewModel()
+fun MusicasScreen(
+    musicasViewModel: MusicasViewModel = viewModel()
 ) {
-    val uiState by alunosViewModel.uiState.collectAsState()
+    val uiState by musicasViewModel.uiState.collectAsState()
 
     when(uiState) {
-        is AlunosUiState.Loading -> LoadingScreen()
-        is AlunosUiState.Success -> AlunosList((uiState as AlunosUiState.Success).alunos)
-        is AlunosUiState.Error -> ErrorScreen()
+        is MusicasUiState.Loading -> LoadingScreen()
+        is MusicasUiState.Success -> MusicasList((uiState as MusicasUiState.Success).musicas)
+        is MusicasUiState.Error -> ErrorScreen()
     }
 }
 
@@ -50,8 +50,8 @@ fun ErrorScreen() {
 }
 
 @Composable
-fun AlunosList(
-    alunos: List<Aluno>
+fun MusicasList(
+    musicas: List<Musica>
 ) {
     LazyVerticalGrid(
         modifier = Modifier
@@ -61,8 +61,8 @@ fun AlunosList(
             1
         )
     ) {
-        items(alunos) {aluno ->
-            AlunoEntry(aluno = aluno)
+        items(musicas) {musicas ->
+            MusicasEntry(musica = musicas)
         }
     }
 }
@@ -72,8 +72,8 @@ fun LoadingScreen() {
 }
 
 @Composable
-fun AlunoEntry(
-    aluno: Aluno
+fun MusicasEntry(
+    musica: Musica
 ) {
     Card(
         modifier = Modifier
@@ -86,11 +86,11 @@ fun AlunoEntry(
 
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(BASE_URL + aluno.imagem)
+                    .data(BASE_URL + musica.id.toString())
                     .crossfade(true)
                     .build(),
-                placeholder = painterResource(R.drawable.logo),
-                contentDescription = aluno.cpf,
+                placeholder = painterResource(R.drawable.ic_launcher_foreground),
+                contentDescription = musica.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.clip(RectangleShape)
             )
@@ -98,7 +98,16 @@ fun AlunoEntry(
                 modifier = Modifier.align(
                     Alignment.BottomCenter
                 ),
-                text = aluno.cpf,
+                text = musica.title,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = Color.White, fontWeight = FontWeight.Bold
+                )
+            )
+            Text(
+                modifier = Modifier.align(
+                    Alignment.BottomCenter
+                ),
+                text = musica.seconds.toString(),
                 style = MaterialTheme.typography.bodyLarge.copy(
                     color = Color.White, fontWeight = FontWeight.Bold
                 )

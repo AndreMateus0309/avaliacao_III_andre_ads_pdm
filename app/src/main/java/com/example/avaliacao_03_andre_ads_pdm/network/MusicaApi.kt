@@ -1,13 +1,13 @@
 package com.example.avaliacao_03_andre_ads_pdm.network
 
-import com.example.avaliacao_03_andre_ads_pdm.data.Aluno
+import com.example.avaliacao_03_andre_ads_pdm.data.Musica
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-const val BASE_URL = "http://127.0.0.1:8000/alunos"
+const val BASE_URL = "http://127.0.0.1:8000"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -18,13 +18,13 @@ private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .build()
 
-interface ChapecoenseApiService {
-    @GET("?format=json")
-    suspend fun getAlunos(): List<Aluno>
+interface MusicaApiService {
+    @GET("/musics/")
+    suspend fun getMusicas(): List<Musica>
 }
 
-object ChapecoenseApi {
-    val retrofitService: ChapecoenseApiService by lazy {
-        retrofit.create(ChapecoenseApiService::class.java)
+object MusicaApi {
+    val retrofitService: MusicaApiService by lazy {
+        retrofit.create(MusicaApiService::class.java)
     }
 }

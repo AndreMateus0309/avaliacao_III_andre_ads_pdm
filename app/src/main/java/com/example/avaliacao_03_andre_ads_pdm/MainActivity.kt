@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.avaliacao_03_andre_ads_pdm.ui.theme.Avaliacao_03_andre_ads_pdmTheme
-import com.example.avaliacao_03_andre_ads_pdm.ui.theme.views.AlunosScreen
+import com.example.avaliacao_03_andre_ads_pdm.ui.theme.views.MusicasScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AlunosScreen()
+                    MusicasScreen()
                 }
             }
         }
